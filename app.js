@@ -1,4 +1,3 @@
-
 // گۆڕاوە سەرەکییەکان
 let currentQuestions = [];
 let currentQuestionIndex = 0;
@@ -30,14 +29,18 @@ function startQuiz(category) {
         topicName = "٣. مەنسووبات";
     } else if (category === 'tawabi') {
         rawQuestions = window.tawabiData || [];
-        topicName = "٤. پاشکۆکان و مەخفووزات";
+        topicName = "٤. پاشکۆکان (التوابع)";
+    } else if (category === 'makhfoodat') {
+        rawQuestions = window.makhfoodatData || [];
+        topicName = "٥. مەخفووزات (المخفوضات)";
     } else if (category === 'mix') {
         // لێرەدا هەموو فایلەکان تێکەڵ دەکەین
         rawQuestions = [
             ...(window.muqadimatData || []),
             ...(window.marfooatData || []),
             ...(window.mansoobatData || []),
-            ...(window.tawabiData || [])
+            ...(window.tawabiData || []),
+            ...(window.makhfoodatData || [])
         ];
         topicName = "🔀 تاقیکردنەوەی تێکەڵە (هەموو بابەتەکان)";
     }
