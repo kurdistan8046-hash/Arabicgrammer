@@ -1,1 +1,67 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ku">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ئەپی الآجرومية - ئەکادیمی</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- هێنانی فۆنتی عەرەبی جوان بۆ پرسیارەکان -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app-container">
+        <!-- شاشەی سەرەکی (لیستی بابەتەکان) -->
+        <div id="home-screen" class="screen active">
+            <header class="main-header">
+                <h1>تاقیکردنەوەی الآجرومية</h1>
+                <p class="subtitle">ئاستی پڕۆفیشناڵ و ئەکادیمی</p>
+                <div class="score-board">
+                    <span>کۆی خاڵەکانت:</span>
+                    <span id="total-score" class="score-number">0</span>
+                </div>
+            </header>
 
+            <div class="categories-container">
+                <h2 class="section-title">کام بابەتت دەوێت ئەزموون بکەیت؟</h2>
+                <button class="cat-btn" onclick="startQuiz('muqadimat')">١. پێشەکی و بنەماکان</button>
+                <button class="cat-btn" onclick="startQuiz('marfooat')">٢. مەرفووعات (المرفوعات)</button>
+                <button class="cat-btn" onclick="startQuiz('mansoobat')">٣. مەنسووبات (المنصوبات)</button>
+                <button class="cat-btn" onclick="startQuiz('tawabi')">٤. پاشکۆکان و مەخفووزات</button>
+                
+                <!-- دوگمەی تێکەڵە -->
+                <button class="cat-btn mix-btn" onclick="startQuiz('mix')">🔀 تاقیکردنەوەی تێکەڵە (Mix)</button>
+            </div>
+        </div>
+
+        <!-- شاشەی پرسیارەکان -->
+        <div id="quiz-screen" class="screen hidden">
+            <header class="quiz-header">
+                <button class="back-btn" onclick="goHome()">🔙 گەڕانەوە</button>
+                <div id="current-topic-title" class="topic-title">ناوی بابەت</div>
+            </header>
+
+            <div class="quiz-body">
+                <!-- پرسیارەکە بە عەرەبی -->
+                <div id="question-text" class="arabic-text question-box">جاري تحميل السؤال...</div>
+                
+                <!-- بژاردەکان -->
+                <div id="options-container" class="options-wrapper"></div>
+
+                <!-- بەڵگە و ئیستیدلال -->
+                <div id="feedback-box" class="feedback-container hidden">
+                    <h3 class="feedback-title">📌 بەڵگە لە مەتنەکەوە:</h3>
+                    <div id="stidlal-text" class="arabic-text stidlal-box">...</div>
+                    <button class="next-btn" id="next-btn" onclick="loadNextQuestion()">پرسیاری داهاتوو ⏭️</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- بەستنەوەی فایلەکانی داتا و لۆجیک -->
+    <script src="data_muqadimat.js"></script>
+    <script src="data_marfooat.js"></script>
+    <script src="data_mansoobat.js"></script>
+    <script src="data_tawabi.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
