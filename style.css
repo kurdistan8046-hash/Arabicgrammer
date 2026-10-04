@@ -1,3 +1,236 @@
+:root {
+    --primary-color: #4f46e5;
+    --primary-hover: #4338ca;
+    --mix-color: #db2777;
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --text-kurdish: #1e293b;
+    --text-arabic: #0f172a;
+    --correct-bg: #dcfce7;
+    --correct-border: #22c55e;
+    --wrong-bg: #fee2e2;
+    --wrong-border: #ef4444;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Tahoma', 'Arial', sans-serif;
+    font-style: normal !important; /* ڕێگریکردن لە لاری فۆنت */
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-kurdish);
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+#app-container {
+    width: 100%;
+    max-width: 600px;
+    background-color: var(--card-bg);
+    min-height: 100vh;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.screen {
+    display: none;
+    padding: 20px;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+.screen.active {
+    display: block;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* شاشەی سەرەکی */
+.main-header {
+    text-align: center;
+    padding: 30px 10px;
+    background: linear-gradient(135deg, var(--primary-color), #818cf8);
+    color: white;
+    border-radius: 0 0 25px 25px;
+    margin: -20px -20px 25px -20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.main-header h1 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-size: 14px;
+    opacity: 0.9;
+    margin-bottom: 15px;
+}
+
+.score-board {
+    background: rgba(255, 255, 255, 0.2);
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.categories-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.section-title {
+    font-size: 18px;
+    color: #475569;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.cat-btn {
+    width: 100%;
+    background-color: white;
+    border: 2px solid #e2e8f0;
+    color: #334155;
+    padding: 16px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: right;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.cat-btn:active {
+    transform: scale(0.98);
+    border-color: var(--primary-color);
+}
+
+.mix-btn {
+    background: linear-gradient(135deg, var(--mix-color), #f472b6);
+    color: white;
+    border: none;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(219, 39, 119, 0.3);
+}
+
+/* شاشەی پرسیارەکان */
+.quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.topic-title {
+    font-weight: bold;
+    color: #64748b;
+}
+
+.arabic-text {
+    font-family: 'Amiri', serif;
+    direction: rtl;
+    line-height: 1.8;
+}
+
+.question-box {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-arabic);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.options-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.option-btn {
+    width: 100%;
+    background-color: white;
+    border: 2px solid #cbd5e1;
+    color: var(--text-arabic);
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-family: 'Amiri', serif;
+    text-align: right;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.option-btn.correct {
+    background-color: var(--correct-bg) !important;
+    border-color: var(--correct-border) !important;
+    color: #166534 !important;
+}
+
+.option-btn.wrong {
+    background-color: var(--wrong-bg) !important;
+    border-color: var(--wrong-border) !important;
+    color: #991b1b !important;
+}
+
+.option-btn.disabled {
+    pointer-events: none;
+}
+
+.feedback-container {
+    margin-top: 25px;
+    padding: 15px;
+    background-color: #f0fdfa;
+    border-right: 5px solid #0d9488;
+    border-radius: 8px;
+}
+
+.feedback-title {
+    font-size: 15px;
+    color: #0f766e;
+    margin-bottom: 10px;
+}
+
+.stidlal-box {
+    font-size: 21px;
+    color: var(--text-arabic);
+    margin-bottom: 15px;
+}
+
+.next-btn {
+    width: 100%;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
 /* دیزاینی پەنجەرەی سەیڤ (Modal) */
 .modal {
     position: absolute;
@@ -10,18 +243,13 @@
     backdrop-filter: blur(4px);
 }
 
-.modal.hidden {
-    display: none !important;
-}
-
 .modal-content {
     background: white;
     padding: 30px 20px;
     border-radius: 20px;
     text-align: center;
     width: 85%;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    animation: slideUp 0.3s ease-out;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
 .modal-content h3 {
@@ -48,7 +276,6 @@
     font-weight: bold;
     cursor: pointer;
     margin-bottom: 15px;
-    box-shadow: 0 4px 6px -1px rgba(34, 197, 94, 0.3);
 }
 
 .text-modal-btn {
