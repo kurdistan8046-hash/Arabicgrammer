@@ -1,3 +1,4 @@
+/* ڕێکخستنە بنەڕەتییەکان */
 :root {
     --primary-color: #4f46e5;
     --primary-hover: #4338ca;
@@ -17,7 +18,7 @@
     margin: 0;
     padding: 0;
     font-family: 'Tahoma', 'Arial', sans-serif;
-    font-style: normal !important; /* ڕێگریکردن لە لاری فۆنت */
+    font-style: normal !important; /* فیکس بۆ لاری فۆنت */
 }
 
 body {
@@ -83,12 +84,6 @@ body {
     font-size: 18px;
 }
 
-.categories-container {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
 .section-title {
     font-size: 18px;
     color: #475569;
@@ -102,6 +97,7 @@ body {
     border: 2px solid #e2e8f0;
     color: #334155;
     padding: 16px;
+    margin-bottom: 12px;
     border-radius: 12px;
     font-size: 16px;
     font-weight: bold;
@@ -121,6 +117,7 @@ body {
     color: white;
     border: none;
     text-align: center;
+    margin-top: 10px;
     box-shadow: 0 4px 10px rgba(219, 39, 119, 0.3);
 }
 
@@ -148,10 +145,12 @@ body {
     color: #64748b;
 }
 
+/* فۆنتی عەرەبی بۆ پرسیار و وەڵامەکان */
 .arabic-text {
     font-family: 'Amiri', serif;
     direction: rtl;
     line-height: 1.8;
+    font-style: normal !important; /* فیکس بۆ لاری فۆنت */
 }
 
 .question-box {
@@ -162,24 +161,24 @@ body {
     text-align: center;
 }
 
-.options-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
 .option-btn {
     width: 100%;
     background-color: white;
     border: 2px solid #cbd5e1;
     color: var(--text-arabic);
     padding: 15px;
+    margin-bottom: 12px;
     border-radius: 10px;
     font-size: 20px;
     font-family: 'Amiri', serif;
     text-align: right;
     cursor: pointer;
     transition: 0.2s;
+    font-style: normal !important; /* فیکس بۆ لاری فۆنت */
+}
+
+.option-btn:active {
+    transform: scale(0.98);
 }
 
 .option-btn.correct {
@@ -198,12 +197,14 @@ body {
     pointer-events: none;
 }
 
+/* ئیستیدلال و ڕوونکردنەوە */
 .feedback-container {
     margin-top: 25px;
     padding: 15px;
     background-color: #f0fdfa;
     border-right: 5px solid #0d9488;
     border-radius: 8px;
+    animation: slideUp 0.3s ease-out;
 }
 
 .feedback-title {
@@ -228,62 +229,14 @@ body {
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-    margin-top: 15px;
 }
 
-/* دیزاینی پەنجەرەی سەیڤ (Modal) */
-.modal {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(15, 23, 42, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    backdrop-filter: blur(4px);
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-.modal-content {
-    background: white;
-    padding: 30px 20px;
-    border-radius: 20px;
-    text-align: center;
-    width: 85%;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-}
-
-.modal-content h3 {
-    color: var(--primary-color);
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.modal-content p {
-    color: #475569;
-    font-size: 18px;
-    margin-bottom: 25px;
-    line-height: 1.6;
-}
-
-.primary-modal-btn {
-    width: 100%;
-    background-color: #22c55e;
-    color: white;
-    border: none;
-    padding: 16px;
-    border-radius: 12px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-bottom: 15px;
-}
-
-.text-modal-btn {
-    background: none;
-    border: none;
-    color: #64748b;
-    font-size: 14px;
-    text-decoration: underline;
-    cursor: pointer;
-    font-weight: bold;
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
