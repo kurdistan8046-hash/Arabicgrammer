@@ -1,5 +1,12 @@
+/* ڕێکخستنە بنەڕەتییەکان و چارەسەری لاری فۆنت */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Tahoma', 'Arial', sans-serif;
+    font-style: normal !important; /* ئەمە ڕێگری دەکات لە خواربوونەوەی دەقەکان */
+}
 
-/* ڕێکخستنە بنەڕەتییەکان */
 :root {
     --primary-color: #4f46e5;
     --primary-hover: #4338ca;
@@ -12,13 +19,6 @@
     --correct-border: #22c55e;
     --wrong-bg: #fee2e2;
     --wrong-border: #ef4444;
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Tahoma', 'Arial', sans-serif;
 }
 
 body {
@@ -150,6 +150,7 @@ body {
     font-family: 'Amiri', serif;
     direction: rtl;
     line-height: 1.8;
+    font-style: normal !important; /* دڵنیابوونەوەی زیاتر بۆ دەقی عەرەبی */
 }
 
 .question-box {
@@ -173,6 +174,7 @@ body {
     text-align: right;
     cursor: pointer;
     transition: 0.2s;
+    font-style: normal !important; /* دڵنیابوونەوەی زیاتر بۆ دوگمەکان */
 }
 
 .option-btn:active {
