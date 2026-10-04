@@ -51,9 +51,19 @@
                 </div>
             </div>
         </div>
+
+        <!-- پەنجەرەی سەیڤکردن (Modal) -->
+        <div id="custom-modal" class="modal hidden">
+            <div class="modal-content">
+                <h3 class="arabic-text">ئاگاداری</h3>
+                <p id="modal-msg" class="arabic-text">تۆ پێشتر ئەم تاقیکردنەوەیەت جێهێشتووە، دەتەوێت لەوێوە بەردەوام بیت؟</p>
+                <button id="resume-btn" class="primary-modal-btn" onclick="resumeSavedQuiz()">دەستپێکردنەوە لە شوێنی خۆت ▶</button>
+                <button id="restart-btn" class="text-modal-btn" onclick="restartQuizFromZero()">دەستپێکردنەوەی یاری لە سەرەتا</button>
+            </div>
+        </div>
+
     </div>
 
-    <!-- بانگکردنی تەواوی فایلەکانی داتا بە ڕێکوپێکی -->
     <script src="data_muqadimat.js"></script>
     <script src="data_marfooat.js"></script>
     <script src="data_mansoobat.js"></script>
