@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ئەپی الآجرومية - ئەکادیمی</title>
     <link rel="stylesheet" href="style.css">
+    <!-- هێنانی فۆنتی عەرەبی جوان بۆ پرسیارەکان -->
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="app-container">
-        <!-- شاشەی سەرەکی -->
+        <!-- شاشەی سەرەکی (لیستی بابەتەکان) -->
         <div id="home-screen" class="screen active">
             <header class="main-header">
                 <h1>تاقیکردنەوەی الآجرومية</h1>
@@ -25,9 +26,10 @@
                 <button class="cat-btn" onclick="startQuiz('muqadimat')">١. پێشەکی و بنەماکان</button>
                 <button class="cat-btn" onclick="startQuiz('marfooat')">٢. مەرفووعات (المرفوعات)</button>
                 <button class="cat-btn" onclick="startQuiz('mansoobat')">٣. مەنسووبات (المنصوبات)</button>
-                <button class="cat-btn" onclick="startQuiz('tawabi')">٤. پاشکۆکان (التوابع)</button>
+                <button class="cat-btn" onclick="startQuiz('tawabi')">٤. پاشکۆکان و مەخفووزات</button>
                 <button class="cat-btn" onclick="startQuiz('makhfoodat')">٥. مەخفووزات (المخفوضات)</button>
                 
+                <!-- دوگمەی تێکەڵە -->
                 <button class="cat-btn mix-btn" onclick="startQuiz('mix')">🔀 تاقیکردنەوەی تێکەڵە (Mix)</button>
             </div>
         </div>
@@ -40,9 +42,13 @@
             </header>
 
             <div class="quiz-body">
+                <!-- پرسیارەکە بە عەرەبی -->
                 <div id="question-text" class="arabic-text question-box">جاري تحميل السؤال...</div>
+                
+                <!-- بژاردەکان -->
                 <div id="options-container" class="options-wrapper"></div>
 
+                <!-- بەڵگە و ئیستیدلال -->
                 <div id="feedback-box" class="feedback-container hidden">
                     <h3 class="feedback-title">📌 بەڵگە لە مەتنەکەوە:</h3>
                     <div id="stidlal-text" class="arabic-text stidlal-box">...</div>
@@ -50,19 +56,9 @@
                 </div>
             </div>
         </div>
-
-        <!-- پەنجەرەی سەیڤکردن (Modal) -->
-        <div id="custom-modal" class="modal hidden">
-            <div class="modal-content">
-                <h3 class="arabic-text">ئاگاداری</h3>
-                <p id="modal-msg" class="arabic-text">تۆ پێشتر ئەم تاقیکردنەوەیەت جێهێشتووە، دەتەوێت لەوێوە بەردەوام بیت؟</p>
-                <button id="resume-btn" class="primary-modal-btn" onclick="resumeSavedQuiz()">دەستپێکردنەوە لە شوێنی خۆت ▶</button>
-                <button id="restart-btn" class="text-modal-btn" onclick="restartQuizFromZero()">دەستپێکردنەوە لە سەرەتا</button>
-            </div>
-        </div>
     </div>
 
-    <!-- بانگکردنی فایلەکان -->
+    <!-- بەستنەوەی فایلەکانی داتا و لۆجیک -->
     <script src="data_muqadimat.js"></script>
     <script src="data_marfooat.js"></script>
     <script src="data_mansoobat.js"></script>
