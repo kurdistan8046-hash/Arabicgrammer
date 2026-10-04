@@ -3,7 +3,7 @@ let currentQuestionIndex = 0;
 let score = 0;
 let currentCategory = ""; 
 let currentTopicName = "";
-let pendingState = null; // بۆ هەڵگرتنی داتای کاتی
+let pendingState = null;
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -20,7 +20,6 @@ function startQuiz(category) {
     if (savedState) {
         const parsedState = JSON.parse(savedState);
         if (parsedState.category === category) {
-            // پیشاندانی پەنجەرە جوانەکە لەبری Confirm ی ناشرین
             pendingState = parsedState;
             document.getElementById('modal-msg').innerText = `تۆ پێشتر گەیشتوویتە پرسیاری ${parsedState.currentIndex + 1}. دەتەوێت لەوێوە بەردەوام بیت؟`;
             document.getElementById('custom-modal').classList.remove('hidden');
@@ -33,7 +32,6 @@ function startQuiz(category) {
     startFreshQuiz();
 }
 
-// دوگمەی: دەستپێکردنەوە لە شوێنی خۆت
 function resumeSavedQuiz() {
     document.getElementById('custom-modal').classList.add('hidden');
     currentTopicName = pendingState.topicName;
@@ -45,14 +43,12 @@ function resumeSavedQuiz() {
     loadNextQuestion();
 }
 
-// دوگمەی: دەستپێکردنەوە لە سەرەتا
 function restartQuizFromZero() {
     document.getElementById('custom-modal').classList.add('hidden');
     localStorage.removeItem('quizProgress');
     startFreshQuiz();
 }
 
-// دەستپێکردنی تازە
 function startFreshQuiz() {
     let rawQuestions = [];
     
@@ -79,7 +75,7 @@ function startFreshQuiz() {
             ...(window.tawabiData || []),
             ...(window.makhfoodatData || [])
         ];
-        currentTopicName = "🔀 تاقیکردنەوەی تێکەڵە (هەموو بابەتەکان)";
+        currentTopicName = "🔀 تاقیکردنەوەی تێکەڵە (Mix)";
     }
 
     if (rawQuestions.length === 0) {
@@ -113,7 +109,6 @@ function loadNextQuestion() {
         return;
     }
 
-    // سەیڤکردن
     localStorage.setItem('quizProgress', JSON.stringify({
         category: currentCategory,
         topicName: currentTopicName,
