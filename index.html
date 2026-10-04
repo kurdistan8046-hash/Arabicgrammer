@@ -9,7 +9,7 @@
 </head>
 <body>
     <div id="app-container">
-        <!-- شاشەی سەرەکی (لیستی بابەتەکان) -->
+        <!-- شاشەی سەرەکی -->
         <div id="home-screen" class="screen active">
             <header class="main-header">
                 <h1>تاقیکردنەوەی الآجرومية</h1>
@@ -28,7 +28,6 @@
                 <button class="cat-btn" onclick="startQuiz('tawabi')">٤. پاشکۆکان (التوابع)</button>
                 <button class="cat-btn" onclick="startQuiz('makhfoodat')">٥. مەخفووزات (المخفوضات)</button>
                 
-                <!-- دوگمەی تێکەڵە -->
                 <button class="cat-btn mix-btn" onclick="startQuiz('mix')">🔀 تاقیکردنەوەی تێکەڵە (Mix)</button>
             </div>
         </div>
@@ -58,12 +57,12 @@
                 <h3 class="arabic-text">ئاگاداری</h3>
                 <p id="modal-msg" class="arabic-text">تۆ پێشتر ئەم تاقیکردنەوەیەت جێهێشتووە، دەتەوێت لەوێوە بەردەوام بیت؟</p>
                 <button id="resume-btn" class="primary-modal-btn" onclick="resumeSavedQuiz()">دەستپێکردنەوە لە شوێنی خۆت ▶</button>
-                <button id="restart-btn" class="text-modal-btn" onclick="restartQuizFromZero()">دەستپێکردنەوەی یاری لە سەرەتا</button>
+                <button id="restart-btn" class="text-modal-btn" onclick="restartQuizFromZero()">دەستپێکردنەوە لە سەرەتا</button>
             </div>
         </div>
-
     </div>
 
+    <!-- بانگکردنی فایلەکان -->
     <script src="data_muqadimat.js"></script>
     <script src="data_marfooat.js"></script>
     <script src="data_mansoobat.js"></script>
