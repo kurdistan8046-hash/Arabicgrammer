@@ -1,11 +1,10 @@
-// گۆڕاوە سەرەکییەکان
 let currentQuestions = [];
 let currentQuestionIndex = 0;
 let score = 0;
 let currentCategory = ""; 
 let currentTopicName = "";
+let pendingState = null; // بۆ هەڵگرتنی داتای کاتی
 
-// فانکشنی تێکەڵکردنی ڕیزبەندی (Shuffle)
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -14,59 +13,65 @@ function shuffleArray(array) {
     return array;
 }
 
-// دەستپێکردنی تاقیکردنەوە بەپێی بابەت
 function startQuiz(category) {
-    // ١. پشکنین بۆ ئەوەی بزانین پێشتر سەیڤ کراوە یان نا
+    currentCategory = category;
     const savedState = localStorage.getItem('quizProgress');
     
     if (savedState) {
         const parsedState = JSON.parse(savedState);
-        
-        // ئەگەر هەمان ئەو بابەتەیە کە پێشتر جێی هێشتووە
         if (parsedState.category === category) {
-            const wantToResume = confirm("تۆ پێشتر ئەم تاقیکردنەوەیەت کردووە و گەیشتوویتەتە پرسیاری " + (parsedState.currentIndex + 1) + ". دەتەوێت لەوێوە بەردەوام بیت؟ \n\n(Cancel لێبدە ئەگەر دەتەوێت لە سفرەوە دەست پێ بکەیتەوە)");
-            
-            if (wantToResume) {
-                currentCategory = parsedState.category;
-                currentTopicName = parsedState.topicName;
-                currentQuestions = parsedState.questions;
-                currentQuestionIndex = parsedState.currentIndex;
-                score = parsedState.score;
-                
-                showQuizScreen();
-                loadNextQuestion();
-                return; // لێرەدا دەوەستێت و ناچێتە خوارەوە بۆ دروستکردنی پرسیاری نوێ
-            } else {
-                localStorage.removeItem('quizProgress'); // ئەگەر ویستی لە سفرەوە دەست پێ بکات
-            }
+            // پیشاندانی پەنجەرە جوانەکە لەبری Confirm ی ناشرین
+            pendingState = parsedState;
+            document.getElementById('modal-msg').innerText = `تۆ پێشتر گەیشتوویتە پرسیاری ${parsedState.currentIndex + 1}. دەتەوێت لەوێوە بەردەوام بیت؟`;
+            document.getElementById('custom-modal').classList.remove('hidden');
+            return;
         } else {
-            // ئەگەر بابەتێکی تری جێهێشتبوو و ئێستا دەیەوێت یەکێکی تر بکات
-            const wantToClear = confirm("تۆ پێشتر تاقیکردنەوەیەکی ترت جێهێشتووە. دەتەوێت ئەوەی پێشوو بسڕیتەوە و ئەمەیان دەست پێ بکەیت؟");
-            if (!wantToClear) return; // ئەگەر پەشیمان بووەوە
             localStorage.removeItem('quizProgress');
         }
     }
 
-    // ٢. ئەگەر سەیڤ نەبوو یان ویستی لە سفرەوە دەست پێ بکات
-    let rawQuestions = [];
-    currentCategory = category;
+    startFreshQuiz();
+}
 
-    if (category === 'muqadimat') {
+// دوگمەی: دەستپێکردنەوە لە شوێنی خۆت
+function resumeSavedQuiz() {
+    document.getElementById('custom-modal').classList.add('hidden');
+    currentTopicName = pendingState.topicName;
+    currentQuestions = pendingState.questions;
+    currentQuestionIndex = pendingState.currentIndex;
+    score = pendingState.score;
+    
+    showQuizScreen();
+    loadNextQuestion();
+}
+
+// دوگمەی: دەستپێکردنەوە لە سەرەتا
+function restartQuizFromZero() {
+    document.getElementById('custom-modal').classList.add('hidden');
+    localStorage.removeItem('quizProgress');
+    startFreshQuiz();
+}
+
+// دەستپێکردنی تازە
+function startFreshQuiz() {
+    let rawQuestions = [];
+    
+    if (currentCategory === 'muqadimat') {
         rawQuestions = window.muqadimatData || [];
         currentTopicName = "١. پێشەکی و بنەماکان";
-    } else if (category === 'marfooat') {
+    } else if (currentCategory === 'marfooat') {
         rawQuestions = window.marfooatData || [];
         currentTopicName = "٢. مەرفووعات";
-    } else if (category === 'mansoobat') {
+    } else if (currentCategory === 'mansoobat') {
         rawQuestions = window.mansoobatData || [];
         currentTopicName = "٣. مەنسووبات";
-    } else if (category === 'tawabi') {
+    } else if (currentCategory === 'tawabi') {
         rawQuestions = window.tawabiData || [];
         currentTopicName = "٤. پاشکۆکان (التوابع)";
-    } else if (category === 'makhfoodat') {
+    } else if (currentCategory === 'makhfoodat') {
         rawQuestions = window.makhfoodatData || [];
         currentTopicName = "٥. مەخفووزات (المخفوضات)";
-    } else if (category === 'mix') {
+    } else if (currentCategory === 'mix') {
         rawQuestions = [
             ...(window.muqadimatData || []),
             ...(window.marfooatData || []),
@@ -90,7 +95,6 @@ function startQuiz(category) {
     loadNextQuestion();
 }
 
-// نیشاندانی شاشەی پرسیارەکان
 function showQuizScreen() {
     document.getElementById('home-screen').classList.remove('active');
     document.getElementById('home-screen').classList.add('hidden');
@@ -101,16 +105,15 @@ function showQuizScreen() {
     document.getElementById('total-score').innerText = score;
 }
 
-// هێنانی پرسیاری داهاتوو
 function loadNextQuestion() {
     if (currentQuestionIndex >= currentQuestions.length) {
         alert("ئافەرین! پرسیارەکانی ئەم بەشەت تەواو کرد. کۆی خاڵەکانت: " + score);
-        localStorage.removeItem('quizProgress'); // سڕینەوەی سەیڤەکە چونکە تەواو بوو
+        localStorage.removeItem('quizProgress');
         goHome();
         return;
     }
 
-    // سەیڤکردنی پڕۆگرێسەکە لەم ساتەدا
+    // سەیڤکردن
     localStorage.setItem('quizProgress', JSON.stringify({
         category: currentCategory,
         topicName: currentTopicName,
@@ -120,7 +123,6 @@ function loadNextQuestion() {
     }));
 
     const q = currentQuestions[currentQuestionIndex];
-    
     document.getElementById('question-text').innerText = q.question;
     document.getElementById('feedback-box').classList.add('hidden');
     
@@ -136,10 +138,8 @@ function loadNextQuestion() {
     });
 }
 
-// پشکنینی وەڵام
 function checkAnswer(selectedIndex, clickedBtn, questionData) {
     const buttons = document.querySelectorAll('.option-btn');
-    
     buttons.forEach(btn => btn.classList.add('disabled'));
     
     if (selectedIndex === questionData.correct) {
@@ -158,7 +158,6 @@ function checkAnswer(selectedIndex, clickedBtn, questionData) {
     currentQuestionIndex++;
 }
 
-// گەڕانەوە بۆ شاشەی سەرەکی
 function goHome() {
     document.getElementById('quiz-screen').classList.remove('active');
     document.getElementById('quiz-screen').classList.add('hidden');
